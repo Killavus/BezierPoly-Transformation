@@ -1,5 +1,7 @@
 /**
- * Implementacja schematu Hornera
+ * Implementacja schematu Hornera i algorytmu de Casteljau.
+ *
+ * Pracownia P3.11.
  *
  * Autorzy: Marcin Grzywaczewski, Szymon Koper
  * Instytut Informatyki Uniwersytetu Wrocławskiego
