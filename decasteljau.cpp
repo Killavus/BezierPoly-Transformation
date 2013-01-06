@@ -24,11 +24,11 @@ Floating deCasteljauAlgorithm(Floating coefficients[] /* an, an-1, ..., a0 */,
 
     // Filling the zero-th values into the array.
     for(i = 0; i <= degree; ++i)
-      deCasteljau[i] = coefficients[i];
+      deCasteljau[degree - i] = coefficients[i];
 
     // Calculating following values.
     for(i = 0; i < degree; ++i) {
-      for(j = 0; j <= (degree - i); j++)
+      for(j = 0; j < (degree - i); j++)
         deCasteljau[j] = (1 - arg) * deCasteljau[j] + arg * deCasteljau[j + 1];
     }
 
@@ -37,12 +37,12 @@ Floating deCasteljauAlgorithm(Floating coefficients[] /* an, an-1, ..., a0 */,
   }
 }  
 
-int main(void) {
-  Floating coeff[3] = { 7.0, 3.5, 2.0 };
+// int main(void) {
+//   Floating coeff[3] = { 7.0, 3.5, 2.0 };
 
-  std::cout << deCasteljauAlgorithm(coeff, 2, 1.0) << std::endl;
-  std::cout << deCasteljauAlgorithm(coeff, 2, 0.75) << std::endl;
-  std::cout << deCasteljauAlgorithm(coeff, 2, 0.5) << std::endl;
+//   std::cout << deCasteljauAlgorithm(coeff, 2, 1.0) << std::endl;
+//   std::cout << deCasteljauAlgorithm(coeff, 2, 0.75) << std::endl;
+//   std::cout << deCasteljauAlgorithm(coeff, 2, 0.5) << std::endl;
 
-  return 0;
-}
+//   return 0;
+// }

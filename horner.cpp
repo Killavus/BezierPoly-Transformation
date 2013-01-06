@@ -34,12 +34,12 @@ Floating hornerScheme(Floating coefficients[] /* an, an-1, ..., a0 */,
   return value;
 }
 
-int main(void) {
-   Floating coeff[3] = { 2.0, 3.0, 2.0 };
+// int main(void) {
+//    Floating coeff[3] = { 2.0, 3.0, 2.0 };
 
-   std::cout << hornerScheme(coeff, 2, 1.0) << std::endl;
-   std::cout << hornerScheme(coeff, 2, 0.75) << std::endl;
-   std::cout << hornerScheme(coeff, 2, 0.5) << std::endl;
+//    std::cout << hornerScheme(coeff, 2, 1.0) << std::endl;
+//    std::cout << hornerScheme(coeff, 2, 0.75) << std::endl;
+//    std::cout << hornerScheme(coeff, 2, 0.5) << std::endl;
 
-   return 0;
-}
+//    return 0;
+// }
