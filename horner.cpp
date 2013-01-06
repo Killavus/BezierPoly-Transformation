@@ -34,12 +34,12 @@ Floating hornerScheme(Floating coefficients[] /* an, an-1, ..., a0 */,
   return value;
 }
 
-// int main(void) {
-//   Floating coeff1[3] = { 1.0, 1.0, 0.0 };
-//   Floating coeff2[1] = { 1337.0 };
+int main(void) {
+   Floating coeff1[3] = { 1.0, 1.0, 0.0 };
+   Floating coeff2[1] = { 1337.0 };
 
-//   printf("%llf\n", hornerScheme(coeff1, 2, 1.0));
-//   printf("%llf\n", hornerScheme(coeff2, 0, 23829.372));
+   printf("%llf\n", hornerScheme(coeff1, 2, 1.0));
+   printf("%llf\n", hornerScheme(coeff2, 0, 23829.372));
 
-//   return 0;
-// }
+   return 0;
+}
