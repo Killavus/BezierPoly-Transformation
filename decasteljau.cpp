@@ -7,7 +7,7 @@
  * Instytut Informatyki Uniwersytetu Wrocławskiego
  * Wrocław, 2013
  **/
-#include <stdio.h>
+#include <iostream>
 
 typedef long double Floating;
 
@@ -41,8 +41,8 @@ int main(void) {
   Floating coeff1[3] = { 1.0, 1.0, 0.0 };
   Floating coeff2[1] = { 1337.0 };
 
-  printf("%llf\n", deCasteljauAlgorithm(coeff1, 2, 1.0));
-  printf("%llf\n", deCasteljauAlgorithm(coeff2, 0, 23829.372));
+  std::cout << deCasteljauAlgorithm(coeff1, 2, 1.0) << std::endl;
+  std::cout << deCasteljauAlgorithm(coeff2, 0, 23829.372) << std::endl;
 
   return 0;
 }
