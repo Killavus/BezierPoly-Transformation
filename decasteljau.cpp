@@ -1,5 +1,5 @@
 /**
- * Implementacja schematu Hornera.
+ * Implementacja algorytmu de Casteljau.
  *
  * Pracownia P3.11.
  *
@@ -13,31 +13,35 @@ typedef long double Floating;
 
 inline bool isPolynomialConstant(int degree) { return degree == 0; }
 
-Floating hornerScheme(Floating coefficients[] /* an, an-1, ..., a0 */, 
-                        int degree, Floating arg) {
-
-  Floating value;
-  if(isPolynomialConstant(degree))
-    value = coefficients[0];
-  else {
-    value = coefficients[0] * arg;
-
-    for(int i = 1; i < degree; ++i)
-      value = (value + coefficients[i]) * arg;
-
-    value += coefficients[degree]; // last step: adding a0.
-  }
-
-  return value;
-}
-
 Floating deCasteljauAlgorithm(Floating coefficients[] /* an, an-1, ..., a0 */,
                                 int degree, Floating arg) {
   Floating value;
   if(isPolynomialConstant(degree))
+  {
     value = coefficients[0];
-  else {
+  }
+  else
+  {
+    Floating deCasteljau[degree + 1];
+    int i, j;
 
+    // Filling the zero-th values into the array.
+    for(i = 0; i < degree; ++i)
+    {
+      deCasteljau[i] = coefficients[i];
+    }
+
+    // Calculating following values.
+    for(i = 0; i < degree; ++i)
+    {
+      for(j = 0; j < degree - i; j++)
+      {
+        deCasteljau[j] = (1 - arg) * coefficients[j] + arg * coefficients[j + 1];
+      }
+    }
+
+    // Last calculated value is the result.
+    return deCasteljau[0];
   }
 }  
 
@@ -45,8 +49,8 @@ Floating deCasteljauAlgorithm(Floating coefficients[] /* an, an-1, ..., a0 */,
 //   Floating coeff1[3] = { 1.0, 1.0, 0.0 };
 //   Floating coeff2[1] = { 1337.0 };
 
-//   printf("%llf\n", hornerScheme(coeff1, 2, 1.0));
-//   printf("%llf\n", hornerScheme(coeff2, 0, 23829.372));
+//   printf("%llf\n", deCasteljauAlgorithm(coeff1, 2, 1.0));
+//   printf("%llf\n", deCasteljauAlgorithm(coeff2, 0, 23829.372));
 
 //   return 0;
 // }

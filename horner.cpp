@@ -20,26 +20,19 @@ Floating hornerScheme(Floating coefficients[] /* an, an-1, ..., a0 */,
   if(isPolynomialConstant(degree))
     value = coefficients[0];
   else {
+    // Start with calculating value using coefficient with highest degree.
     value = coefficients[0] * arg;
 
+    // Calculating using following coefficients.
     for(int i = 1; i < degree; ++i)
       value = (value + coefficients[i]) * arg;
 
-    value += coefficients[degree]; // last step: adding a0.
+     // Last step is adding coefficient with zero degree (a0).
+    value += coefficients[degree];
   }
 
   return value;
 }
-
-Floating deCasteljauAlgorithm(Floating coefficients[] /* an, an-1, ..., a0 */,
-                                int degree, Floating arg) {
-  Floating value;
-  if(isPolynomialConstant(degree))
-    value = coefficients[0];
-  else {
-
-  }
-}  
 
 // int main(void) {
 //   Floating coeff1[3] = { 1.0, 1.0, 0.0 };
