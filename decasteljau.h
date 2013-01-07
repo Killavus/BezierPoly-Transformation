@@ -11,13 +11,15 @@
 
 typedef long double Floating;
 
-inline bool isPolynomialConstant(int degree) { return degree == 0; }
-
 Floating deCasteljauAlgorithm(Floating coefficients[] /* an, an-1, ..., a0 */,
                                 int degree, Floating arg) {
+
   Floating value;
-  if(isPolynomialConstant(degree))
+
+  // If polynomial is constant.
+  if(degree == 0)
     value = coefficients[0];
+  // Polynomial isn't constant.
   else {
     Floating deCasteljau[degree + 1];
     int i, j;
