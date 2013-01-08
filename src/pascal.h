@@ -7,7 +7,7 @@
  **/
 #ifndef __PASCAL_H__
 #define __PASCAL_H__
-#include "define.h"
+#include "generic.h"
 
 void pascal_populate(int result_table[]);
 int pascal_value(int results[], int row, int col);

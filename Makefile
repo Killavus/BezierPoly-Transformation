@@ -1,5 +1,5 @@
 APP = A3P11
-OBJ = decasteljau.o horner.o pascal.o toexpform.o tobezierform.o main.o
+OBJ = compute.o generic.o main.o pascal.o transform.o
 
 .PHONY: clean program
 
