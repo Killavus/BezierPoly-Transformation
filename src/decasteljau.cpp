@@ -8,7 +8,6 @@
  * Wrocław, 2013
  **/
 #include "define.h"
-#include "decasteljau.h"
 
 Floating de_casteljau(Floating coefficients[] /* an, an-1, ..., a0 */,
                       int degree, Floating arg) {

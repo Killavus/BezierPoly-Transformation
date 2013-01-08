@@ -8,7 +8,6 @@
  * Wrocław, 2013
  **/
 #include "define.h"
-#include "horner.h"
 
 Floating horner(Floating coefficients[] /* an, an-1, ..., a0 */, 
                 int degree, Floating arg) {
