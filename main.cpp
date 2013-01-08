@@ -1,6 +1,4 @@
 /**
- * Implementacja schematu Hornera.
- *
  * Pracownia P3.11.
  *
  * Autorzy: Marcin Grzywaczewski, Szymon Koper
