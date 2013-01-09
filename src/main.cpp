@@ -19,5 +19,14 @@ int main(void) {
   std::cout << "Populating the Pascal triangle..." << std::endl;
   pascal_populate(pascal);
 
+  Floating exp_coeffs[3] = { 2.0, 3.0, 2.0 };
+  Floating bez_coeffs[3];
+
+  to_bezier_form(pascal, 2, exp_coeffs, bez_coeffs);
+  for(int i = 0; i < 3; ++i) {
+    std::cout << bez_coeffs[i] << " ";
+  }
+  std::cout << std::endl;
+
   return 0;
 }
