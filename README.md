@@ -2,14 +2,11 @@ A comparison of polynomial forms and their evaluating methods
 =============================================================
 
 Power Form: Horner Scheme
-
 Bezier Form: de Casteljau algorithm
 
 TO DO:
 ------
 
-* Implementation of conversion from Power to Bezier Form.	-->	powertobezier.h
-* Implementation of reverse conversion.	-->	beziertopower.h
 * Tests. --> main.cpp
 * Whole description of task. --> p3-11.tex
 	* Introduction
@@ -20,5 +17,8 @@ TO DO:
 DONE:
 -----
 
-* Implementation of Horner Scheme.	-->	horner.h
-* Implementation of de Casteljau algorithm.	-->	decasteljau.h
+* Implementation of Horner Scheme.	-->	compute.h
+* Implementation of de Casteljau algorithm.	-->	compute.h
+* Implementation of Bezier-to-Exp transformation --> transform.h
+* Implementation of Exp-to-Bezier transformation --> transform.h
+* Some printing methods --> main.cpp
