@@ -28,5 +28,11 @@ int main(void) {
   }
   std::cout << std::endl;
 
+  to_exp_form(pascal, 2, bez_coeffs, exp_coeffs);
+  for(int i = 0; i < 3; ++i) {
+    std::cout << exp_coeffs[i] << " ";
+  }
+  std::cout << std::endl;
+
   return 0;
 }

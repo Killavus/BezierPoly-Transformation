@@ -11,5 +11,5 @@ program: $(OBJ)
 
 clean: 
 	rm -f *.o
-	rm $(APP)
+	rm -f $(APP)
 
