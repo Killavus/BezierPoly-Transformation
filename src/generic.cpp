@@ -8,24 +8,22 @@
  * Wrocław, 2013
  **/
 #include "generic.h"
+#include <iostream>
 
-/** Algorytm sumacyjny Kahana - bazując na: 
- * http://pl.wikipedia.org/wiki/Algorytm_sumacyjny_Kahana
+/**
+ * Patrz sprawozdanie w celu poznania odpowiedzi "jak to zostało stworzone"
  **/
-Floating kahan_sum(Floating components[], int length) {
-  Floating sum;
-  if(length == 0) 
-    sum = 0.0;
-  else {
-    sum = components[0];
-    Floating correction = 0.0, component_sub;
+Floating reduction_bezier_binomial(int n, int i, int j) {
+  Floating result = 1.0;
 
-    for(int i = 1; i < length; ++i) {
-      component_sub = components[i] - correction;
-      correction = ((sum + component_sub) - sum) - component_sub;
-      sum += component_sub;
-    }
-  }
+  for(Floating k = n-i+1; k <= n; k += 1.0)
+    result *= (k - n + j) / k; 
 
-  return sum;
+  return result;
 }
+
+Floating reduction_expotential_binomial(int j, int i, int n, int k) {
+
+}
+
+

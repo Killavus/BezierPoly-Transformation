@@ -19,8 +19,8 @@ void to_bezier_form(int pascal[], int degree,
     Floating inverted_newt = 1.0 / pascal_value(pascal, degree, degree - i);
 
     for(int j = degree - i; j <= degree; ++j)
-      r_coeffs[degree - j] += s_coeffs[i] * inverted_newt * 
-                             pascal_value(pascal, j, degree - i);
+      r_coeffs[degree - j] += s_coeffs[i] * 
+        reduction_bezier_binomial(degree, degree - i, j);
   }
 }
 
