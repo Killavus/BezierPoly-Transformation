@@ -11,7 +11,10 @@
 #include <iostream>
 
 /**
- * Patrz sprawozdanie w celu poznania odpowiedzi "jak to zostało stworzone"
+ * Redukcja problemu obliczania (n po i)^(-1) * (j po i), 
+ * aby zmniejszyć wyniki pośrednie.
+ *
+ * Proces przekształcenia tego wzoru jest przedstawiony w sprawozdaniu.
  **/
 Floating reduction_bezier_binomial(int n, int i, int j) {
   Floating result = 1.0;
@@ -21,9 +24,3 @@ Floating reduction_bezier_binomial(int n, int i, int j) {
 
   return result;
 }
-
-Floating reduction_expotential_binomial(int j, int i, int n, int k) {
-
-}
-
-
