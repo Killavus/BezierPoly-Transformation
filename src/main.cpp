@@ -25,15 +25,7 @@ int main(void) {
            poly2[11] = {2,-31,44,204,13,-287,159,60,-29,-48,144},
            poly3[13] = {-3,-8,7,4,-40,-60,-54,-18,109,0,-2,29,24},
            poly4[21] = {-7,62,-79,16,-97,-4,-11,28,25,-193,285,-226,13,-6,-7,-15,-51,168,-26,4,-16},
-           //zeroes1[4] = {0, 1, 2, 3},
-           //zeroes2[10] = {-43466.5324, -7756.431, -2353.47, -545.33229, -321.3, 3.23, 6.4325, 75.867, 54322.1129, 89983.5886},
-           //zeroes3[12] = {0.125, 0.25, 0.5, 1, 2, 4, 8, 16, 32, 64, 128, 256},
-           //zeroes4[20] = {-23033.43, -1338.223, -1337.77, -1336.98, 0, 5, 6, 7, 30.234, 65.665, 255.454, 7778.73, 54576.43, 67564.234, 127443.78, 231563.66, 544677.02, 700033, 1023664.324, 3424995.3},
-
            max[21];
-
-  // błąd względny: (x - obliczone x) / x
-
   
   // Z potęgowej do beziera.
   // pascal - tablica z trójkątem pascala
@@ -50,18 +42,6 @@ int main(void) {
   // bezier_wilkinson_19th miejsce na współczynniki w postaci potęgowej (tablica stopień + 1)
   to_exp_form(pascal, 19, bezier_wilkinson_19th, wilkinson_19th);
 
-  // Obliczanie hornerem
-  // wilkinson_19th współczynniki
-  // 19 - stopień
-  // 1.5 - argument x do policzenia f(x)
-  horner(wilkinson_19th, 19, 1.5);
-
-  // Obliczanie de Casteljau
-  // bezier_wilkinson_19th współczynniki
-  // 19 - stopień
-  // 1.5 - argument x do policzenia f(x)
-  de_casteljau(bezier_wilkinson_19th, 19, 1.5);
-
   // Test 1: przekształć 1, 10, 100, 1000, 10000 razy jakieś kilka wielomianów z jednej postaci do drugiej.
   // Po każdym z tych 1, 10, 100, 1000, 10000 kroków licz wartości hornerem / de casteljau i licz błąd względny.
   //
@@ -70,11 +50,11 @@ int main(void) {
   for (int i = 1; i <= 1000000; ++i) {
     to_bezier_form(pascal, 4, poly1, max);
     if(i == 1 || i == 10 || i == 100 || i == 1000 || i == 10000 || i == 100000 || i == 1000000) {
-      std::cout << "De Casteljau (i == " << i << ") error: " << de_casteljau(max, 4, 2) << std::endl;
+      std::cout << "De Casteljau (i == " << i << ") error: " << de_casteljau(max, 4, 3) << std::endl;
     }
     to_exp_form(pascal, 4, max, poly1);
     if(i == 1 || i == 10 || i == 100 || i == 1000 || i == 10000 || i == 100000 || i == 1000000) {
-      std::cout << "Horner (i == " << i << ") error: " << horner(poly1, 4, 2) << std::endl;
+      std::cout << "Horner (i == " << i << ") error: " << horner(poly1, 4, 3) << std::endl;
     }
   }
 
@@ -82,11 +62,11 @@ int main(void) {
   for (int i = 1; i <= 1000000; ++i) {
     to_bezier_form(pascal, 10, poly2, max);
     if(i == 1 || i == 10 || i == 100 || i == 1000 || i == 10000 || i == 100000 || i == 1000000) {
-      std::cout << "De Casteljau (i == " << i << ") error: " << de_casteljau(max, 10, 2) << std::endl;
+      std::cout << "De Casteljau (i == " << i << ") error: " << de_casteljau(max, 10, 4) << std::endl;
     }
     to_exp_form(pascal, 10, max, poly2);
     if(i == 1 || i == 10 || i == 100 || i == 1000 || i == 10000 || i == 100000 || i == 1000000) {
-      std::cout << "Horner (i == " << i << ") error: " << horner(poly2, 10, 2) << std::endl;
+      std::cout << "Horner (i == " << i << ") error: " << horner(poly2, 10, 4) << std::endl;
     }
   }
 
@@ -106,16 +86,13 @@ int main(void) {
   for (int i = 1; i <= 1000000; ++i) {
     to_bezier_form(pascal, 20, poly4, max);
     if(i == 1 || i == 10 || i == 100 || i == 1000 || i == 10000 || i == 100000 || i == 1000000) {
-      std::cout << "De Casteljau (i == " << i << ") error: " << de_casteljau(max, 20, 4) << std::endl;
+      std::cout << "De Casteljau (i == " << i << ") error: " << de_casteljau(max, 20, 2) << std::endl;
     }
     to_exp_form(pascal, 20, max, poly4);
     if(i == 1 || i == 10 || i == 100 || i == 1000 || i == 10000 || i == 100000 || i == 1000000) {
-      std::cout << "Horner (i == " << i << ") error: " << horner(poly3, 20, 4) << std::endl;
+      std::cout << "Horner (i == " << i << ") error: " << horner(poly4, 20, 2) << std::endl;
     }
   }
-
-  
-
 
   return 0;
 }
