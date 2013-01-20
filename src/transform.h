@@ -11,9 +11,9 @@
 #define __TRANSFORM_H__
 #include "generic.h"
 
-void to_bezier_form(int pascal[], int degree, 
+void to_bezier_form(Floating pascal[], int degree, 
                     Floating s_coeffs[], Floating r_coeffs[]);
 
-void to_exp_form(int pascal[], int degree,
+void to_exp_form(Floating pascal[], int degree,
                  Floating s_coeffs[], Floating r_coeffs[]);
 #endif //__TRANSFORM_H__

@@ -11,7 +11,7 @@ static int PAS_POS(int row, int col) {
   return row * PASCAL_SIZE + (col % PASCAL_SIZE); 
 }
 
-void pascal_populate(int result_table[]) {
+void pascal_populate(Floating result_table[]) {
   result_table[PAS_POS(0, 0)] = 1;
   result_table[PAS_POS(1, 0)] = 1;
   result_table[PAS_POS(1, 1)] = 1;
@@ -24,6 +24,6 @@ void pascal_populate(int result_table[]) {
   }
 }
 
-int pascal_value(int results[], int row, int col) {
+Floating pascal_value(Floating results[], int row, int col) {
   return results[PAS_POS(row, col)];
 }

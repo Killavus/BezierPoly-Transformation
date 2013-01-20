@@ -10,7 +10,7 @@
 #include "generic.h"
 #include "pascal.h"
 
-void to_bezier_form(int pascal[], int degree, 
+void to_bezier_form(Floating pascal[], int degree, 
                     Floating s_coeffs[], Floating r_coeffs[]) {
   for(int i = 0; i <= degree; ++i)
     r_coeffs[i] = 0.0;
@@ -22,7 +22,7 @@ void to_bezier_form(int pascal[], int degree,
   }
 }
 
-void to_exp_form(int pascal[], int degree,
+void to_exp_form(Floating pascal[], int degree,
                  Floating s_coeffs[], Floating r_coeffs[]) {
   for(int i = 0; i <= degree; ++i)
     r_coeffs[i] = 0.0;

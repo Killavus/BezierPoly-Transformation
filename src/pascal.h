@@ -9,6 +9,6 @@
 #define __PASCAL_H__
 #include "generic.h"
 
-void pascal_populate(int result_table[]);
-int pascal_value(int results[], int row, int col);
+void pascal_populate(Floating result_table[]);
+Floating pascal_value(Floating results[], int row, int col);
 #endif //__PASCAL_H__
