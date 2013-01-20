@@ -22,9 +22,9 @@ int main(void) {
            bezier_wilkinson_19th[20];
 
   Floating poly1[5] = {1,-6,11,-6,0},
-           poly2[11] = {1.0,-89948.16531000001,-2.456356317503192e9,1.9475944057289075e14,2.2761147008388884e18,5.556675039400089e21,3.2428968562701e24,3.64610409911485e26,-5.5318558175671496e28,5.0640763103490604e29,-1.071205332158518e30},
-           poly3[13] = {1.0,-511.875,87317.34375,-6380403.046875,2.17359063796875e8,-3.57590717859375e9,2.8834299154375e10,-1.14429029715e11,2.22575681328e11,-2.0907304704e11,9.155887104e10,-1.717567488e10,1.073741824e9},
-           poly4[21] = {1.0,-6155619.428,1.2124223093838535e13,-1.0806408800405459e19,4.796951549319206e24,-1.0612719949064219e30,1.1143065408379247e35,-4.581952900739634e39,-6.838143727629198e42,3.538035092501021e48,-1.32073397014854e52,-8.117549378902837e55,-1.0024166343780236e59,-1.6626137419279945e61,1.8801821715939992e64,-1.9200940643006375e66,6.215969607679914e67,-7.43040655398291e68,3.718386971019575e69,-6.644309735902824e69,0.0},
+           poly2[11] = {2,-31,44,204,13,-287,159,60,-29,-48,144},
+           poly3[13] = {-3,-8,7,4,-40,-60,-54,-18,109,0,-2,29,24},
+           poly4[21] = {-7,62,-79,16,-97,-4,-11,28,25,-193,285,-226,13,-6,-7,-15,-51,168,-26,4,-16},
            //zeroes1[4] = {0, 1, 2, 3},
            //zeroes2[10] = {-43466.5324, -7756.431, -2353.47, -545.33229, -321.3, 3.23, 6.4325, 75.867, 54322.1129, 89983.5886},
            //zeroes3[12] = {0.125, 0.25, 0.5, 1, 2, 4, 8, 16, 32, 64, 128, 256},
@@ -70,11 +70,11 @@ int main(void) {
   for (int i = 1; i <= 1000000; ++i) {
     to_bezier_form(pascal, 4, poly1, max);
     if(i == 1 || i == 10 || i == 100 || i == 1000 || i == 10000 || i == 100000 || i == 1000000) {
-      std::cout << "De Casteljau (i == " << i << ") error: " << de_casteljau(max, 4, 2);
+      std::cout << "De Casteljau (i == " << i << ") error: " << de_casteljau(max, 4, 2) << std::endl;
     }
     to_exp_form(pascal, 4, max, poly1);
     if(i == 1 || i == 10 || i == 100 || i == 1000 || i == 10000 || i == 100000 || i == 1000000) {
-      std::cout << "Horner (i == " << i << ") error: " << horner(poly1, 4, 2);
+      std::cout << "Horner (i == " << i << ") error: " << horner(poly1, 4, 2) << std::endl;
     }
   }
 
@@ -82,11 +82,11 @@ int main(void) {
   for (int i = 1; i <= 1000000; ++i) {
     to_bezier_form(pascal, 10, poly2, max);
     if(i == 1 || i == 10 || i == 100 || i == 1000 || i == 10000 || i == 100000 || i == 1000000) {
-      std::cout << "De Casteljau (i == " << i << ") error: " << de_casteljau(max, 10, 3.23);
+      std::cout << "De Casteljau (i == " << i << ") error: " << de_casteljau(max, 10, 2) << std::endl;
     }
     to_exp_form(pascal, 10, max, poly2);
     if(i == 1 || i == 10 || i == 100 || i == 1000 || i == 10000 || i == 100000 || i == 1000000) {
-      std::cout << "Horner (i == " << i << ") error: " << horner(poly2, 10, 3.23);
+      std::cout << "Horner (i == " << i << ") error: " << horner(poly2, 10, 2) << std::endl;
     }
   }
 
@@ -94,11 +94,11 @@ int main(void) {
   for (int i = 1; i <= 1000000; ++i) {
     to_bezier_form(pascal, 12, poly3, max);
     if(i == 1 || i == 10 || i == 100 || i == 1000 || i == 10000 || i == 100000 || i == 1000000) {
-      std::cout << "De Casteljau (i == " << i << ") error: " << de_casteljau(max, 12, 128);
+      std::cout << "De Casteljau (i == " << i << ") error: " << de_casteljau(max, 12, -3) << std::endl;
     }
     to_exp_form(pascal, 12, max, poly3);
     if(i == 1 || i == 10 || i == 100 || i == 1000 || i == 10000 || i == 100000 || i == 1000000) {
-      std::cout << "Horner (i == " << i << ") error: " << horner(poly3, 12, 128);
+      std::cout << "Horner (i == " << i << ") error: " << horner(poly3, 12, -3) << std::endl;
     }
   }
 
@@ -106,11 +106,11 @@ int main(void) {
   for (int i = 1; i <= 1000000; ++i) {
     to_bezier_form(pascal, 20, poly4, max);
     if(i == 1 || i == 10 || i == 100 || i == 1000 || i == 10000 || i == 100000 || i == 1000000) {
-      std::cout << "De Casteljau (i == " << i << ") error: " << de_casteljau(max, 20, 30.234);
+      std::cout << "De Casteljau (i == " << i << ") error: " << de_casteljau(max, 20, 4) << std::endl;
     }
     to_exp_form(pascal, 20, max, poly4);
     if(i == 1 || i == 10 || i == 100 || i == 1000 || i == 10000 || i == 100000 || i == 1000000) {
-      std::cout << "Horner (i == " << i << ") error: " << horner(poly3, 20, 30.234);
+      std::cout << "Horner (i == " << i << ") error: " << horner(poly3, 20, 4) << std::endl;
     }
   }
 
