@@ -1,2 +1,5 @@
 *.o
+*.log
+*.pdf
+*.aux
 A3P11
