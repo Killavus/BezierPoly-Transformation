@@ -30,7 +30,7 @@ numerycznym sposobów wzajemnych przekształceń tych postaci z jednej w drugą,
 oraz problem obliczania wartości wielomianu w punkcie $x$ w obu tych 
 postaciach.
 
-\subsection{Motywacja}
+\subsection{Postać potęgowa wielomianu}
 Znana jest bardzo prosta metoda obliczania wartości wielomianu w postaci
 potęgowej. Efektywny czasowo algorytm schematu Hornera pozwala na obliczanie
 wartości w punkcie $x$ wielomianu za pomocą $n$ mnożeń i $n$ dodawań.
@@ -66,7 +66,68 @@ słabo uwarunkowane. Sprawia to, że mimo tego, iż posiadamy tak dobry algorytm
 jakim jest schemat Hornera, błąd względny obliczania wartości $\pi_n(x)$ będzie 
 duży.
 
-\emph{TODO: Dowód - wskaźnik uwarunkowania obliczania wielomianu w 
-postaci potęgowej}
+\subsection{Postać Béziera wielomianu}
+
+Wielomian $\pi_n$ możemy także przedstawić w postaci Béziera, tj. przedstawić
+go jako kombinację liniową w bazie wielomianów Bernsteina, które wyrażają się
+wzorem:
+\begin{equation}
+  B^n_i(u) = {n \choose i}u^i(1-u)^{n-i}
+\end{equation}
+
+Wielomiany te służą także do przedstawiania szeroko stosowanych w grafice
+komputerowej krzywych Béziera.
+
+W wypadku takiego przedstawienia wielomian $\pi_n$ wyraża się wzorem:
+\begin{equation}
+  \label{bezier_form}
+  \pi_n(x) = \sum_{i=0}^n\beta_iB^n_i(x)
+\end{equation}
+
+Do obliczania wartości wielomianu (\ref{bezier_form}) w punkcie $x$ wykorzystamy
+następujący związek rekurencyjny:
+\begin{subequations}
+  \begin{align}
+    \gamma_i^{(0)} := \beta_i\\
+    \gamma_i^{(k)} := (1-x)\gamma_i^{(k-1)} + t\gamma_{i+1}^{(k-1)}\\
+    \gamma_0^{(n)} = \pi_n(x)
+  \end{align}
+\end{subequations}
+Obliczając wartości w sposób przedstawiony na schemacie:
+TODO: SCHEMAT
+
+Otrzymujemy działający w czasie kwadratowym algorytm obliczania wartości
+wielomianu $\pi_n$ w punkcie $x$ w postaci Béziera, zwany 
+\emph{algorytmem de Casteljau}.
+
+Obliczanie wartości wielomianu w postaci Béziera jest lepiej uwarunkowane od
+obliczania wartości wielomianu w postaci potęgowej. Jest to nasza główna
+motywacja stojąca za przyjrzeniem się zagadnieniu wzajemnych przekształceń tych
+postaci.
+
+\subsection{Poprawność algorytmu de Casteljau}
+TODO
+
+\subsection{Uwarunkowanie zadania obliczania wartości wielomianu w postaci potęgowej}
+TODO
+
+\subsection{Uwarunkowanie zadania obliczania wartości wielomianu w postaci de Casteljau}
+TODO
+
+\subsection{Przekształcanie wielomianu z postaci potęgowej do postaci Béziera}
+TODO
+
+\subsection{Przekształcanie wielomianu z postaci Béziera do postaci potęgowej}
+TODO
+
+\section{Testy}
+
+\subsection{Wielokrotnie przekształcanie z jednej bazy do drugiej}
+
+\subsection{Obliczanie wielomianów za pomocą algorytmów Hornera oraz de Casteljau}
+
+\section{Ocena wyników i wnioski}
+
+\section{Podsumowanie}
 
 \end{document}
