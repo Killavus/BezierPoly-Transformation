@@ -11,7 +11,7 @@
 #define __GENERIC_H__
 typedef long double Floating;
 
-const int PASCAL_SIZE = 100;
+const int PASCAL_SIZE = 120;
 
 /**
  * Skrócenie z odwróconym symbolem Newtona przy przekształceniu Beziera.
