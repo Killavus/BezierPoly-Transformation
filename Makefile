@@ -1,5 +1,5 @@
 APP = A3P11
-OBJ = compute.o generic.o main.o pascal.o transform.o
+OBJ = compute.o generic.o program.o pascal.o transform.o
 
 .PHONY: clean program tex
 
@@ -7,9 +7,9 @@ program: $(OBJ)
 	g++ $(OBJ) -o $(APP)
 
 tex:
-	cd tex && pdflatex p3-11.tex
+	cd doc && pdflatex sprawozdanie.tex
 
-%.o: src/%.cpp
+%.o: prog/%.cpp
 	g++ $(CXXFLAGS) -c $< -o $@
 
 clean: 
