@@ -1,0 +1,200 @@
+\documentclass[wide, 11pt]{mwart}
+
+\usepackage[utf8]{inputenc}
+\usepackage[OT4,plmath]{polski}
+\usepackage{amsmath,amssymb,amsfonts,amsthm,mathtools}
+\usepackage{algorithmicx} 
+\usepackage{algpseudocode}
+\usepackage{graphicx}
+
+\date{Wrocław, \today}
+\title{Pracownia z analizy numerycznej (M),\\[8pt]\large{Zadanie P3.11}}
+\author{Marcin Grzywaczewski\footnote{killavus@gmail.com} \and Szymon Koper\footnote{sz.koper@gmail.com}}
+
+\begin{document}
+	\maketitle
+	\begin{center}
+	Numery indeksów:\\247948 (MG)\\247985 (SzK)
+	\end{center}
+	\thispagestyle{empty}
+	\newpage
+
+\section{Wstęp}
+Wielomiany są niezwykle ważną z numerycznego punktu widzenia rodziną funkcji.
+Ich unikalne własności pozwalają na wykorzystanie ich w wielu dziedzinach -
+od aproksymacji i interpolacji funkcji, po obliczanie wartości całek za pomocą
+metod numerycznych. Posiadają one wiele postaci, każda z nich charakteryzuje
+się innymi wadami, oraz zaletami.
+
+W tej pracowni zostaną omówione dwie postacie wielomianów - najbardziej 
+popularna potęgowa, oraz postać Béziera. Skupiono się na sprawdzenie pod kątem
+numerycznym sposobów wzajemnych przekształceń tych postaci z jednej w drugą,
+oraz problem obliczania wartości wielomianu w punkcie $x$ w obu tych 
+postaciach.
+
+\subsection{Postać potęgowa wielomianu}
+Znana jest bardzo prosta metoda obliczania wartości wielomianu w postaci
+potęgowej. Efektywny czasowo algorytm schematu Hornera pozwala na obliczanie
+wartości w punkcie $x$ wielomianu za pomocą $n$ mnożeń i $n$ dodawań.
+
+Algorytm opiera się na prostej obserwacji. Wielomian $\pi$ $n$-tego stopnia
+\[\pi_n(x) = a_nx^n + a_{n-1}x^{n-1} + \ldots + a_1x + a_0\] możemy zapisać 
+jako:
+\begin{equation}
+  \label{horner_scheme_formula}
+  \pi_n(x) = a_0 + x(a_1 + x(a_2 + x(\ldots + x(a_{n-1} + a_nx))\ldots)
+\end{equation}
+
+Oczywiście, dla wielomianu $0$ stopnia jego wartością dla dowolnego punktu $x$
+jest $a_0$. W przypadku wielomianów stopnia wyższego, mając dane współczynniki
+$a_n, a_{n-1}, \ldots, a_1, a_0$, oraz punkt $x$, opierając się na wzorze 
+(\ref{horner_scheme_formula}) możemy skonstruować następujący związek 
+rekurencyjny:
+\begin{subequations}
+  \begin{align}
+    \beta_0 = \pi_n(x)\\
+    \beta_0 = \beta_1 + a_0\\
+    \beta_n = a_{n-1} + a_nx\\
+    \beta_i = x(a_{n-2} + \beta_{i+1})
+  \end{align}
+\end{subequations}
+
+Obliczając wartości $\beta_n, \beta_{n-1}, \ldots, \beta_1, \beta_0$ otrzymamy
+algorytm obliczania wartości wielomianu w postaci potęgowej w czasie liniowym,
+znany pod nazwą \emph{schematu Hornera}.
+
+Niestety, obliczanie wartości wielomianu w postaci potęgowej jest 
+słabo uwarunkowane. Sprawia to, że mimo tego, iż posiadamy tak dobry algorytm,
+jakim jest schemat Hornera, błąd względny obliczania wartości $\pi_n(x)$ będzie 
+duży.
+
+\subsection{Postać Béziera wielomianu}
+
+Wielomian $\pi_n$ możemy także przedstawić w postaci Béziera, tj. przedstawić
+go jako kombinację liniową w bazie wielomianów Bernsteina, które wyrażają się
+wzorem:
+\begin{equation}
+  B^n_i(u) = {n \choose i}u^i(1-u)^{n-i}
+\end{equation}
+
+Wielomiany te służą także do przedstawiania szeroko stosowanych w grafice
+komputerowej krzywych Béziera.
+
+W wypadku takiego przedstawienia wielomian $\pi_n$ wyraża się wzorem:
+\begin{equation}
+  \label{bezier_form}
+  \pi_n(x) = \sum_{i=0}^n\beta_iB^n_i(x)
+\end{equation}
+
+Do obliczania wartości wielomianu (\ref{bezier_form}) w punkcie $x$ wykorzystamy
+następujący związek rekurencyjny:
+\begin{subequations}
+  \begin{align}
+    \gamma_i^{(0)} := \beta_i\\
+    \gamma_i^{(k)} := (1-x)\gamma_i^{(k-1)} + t\gamma_{i+1}^{(k-1)}\\
+    \gamma_0^{(n)} = \pi_n(x)
+  \end{align}
+\end{subequations}
+Obliczając wartości w sposób przedstawiony na schemacie:
+\begin{subequations}
+  \begin{gather}
+    \gamma_0^{(0)}, \gamma_1^{(0)}, \gamma_2^{(0)}, \gamma_3^{(0)}, \ldots, \gamma_n^{(0)}\\
+    \gamma_0^{(1)}, \gamma_1^{(1)}, \gamma_2^{(1)}, \ldots, \gamma_{n-1}^{(1)}\\
+    \vdots \\
+    \gamma_0^{(n-1)}, \gamma_1^{(n-1)}\\
+    \gamma_0^{(n)}
+  \end{gather}
+\end{subequations}
+
+Otrzymujemy działający w czasie kwadratowym algorytm obliczania wartości
+wielomianu $\pi_n$ w punkcie $x$ w postaci Béziera, zwany 
+\emph{algorytmem de Casteljau}.
+
+Obliczanie wartości wielomianu w postaci Béziera jest lepiej uwarunkowane od
+obliczania wartości wielomianu w postaci potęgowej. Jest to nasza główna
+motywacja stojąca za przyjrzeniem się zagadnieniu wzajemnych przekształceń tych
+postaci.
+
+\subsection{Przekształcanie wielomianu z postaci potęgowej do postaci Béziera}
+Przekształcanie postaci potęgowej do postaci Béziera realizujemy poprzez użycie
+następującego wzoru:
+\begin{equation}
+  \label{to_poly}
+  t^i = {n \choose i}^{-1}{\sum_{j=i}^n}{j \choose i}B^n_j(t) 
+\end{equation}
+Oraz:
+\begin{equation}
+  B^n_i(t) = {\sum_{k=i}^n}(-1)^{i+k}{k \choose i}{n \choose k}t^k
+\end{equation}
+Stosujemy te wzory w następujący sposób. Mając daną postać potęgową wielomianu 
+\[\pi_n(t) = {\sum_{i=0}^n}a_it^i\], aby obliczyć wartości $\beta_0, \beta_1, 
+\beta_2, \ldots, \beta_n$ postaci Béziera tego samego wielomianu 
+\[\pi_n(t) = {\sum_{i=0}^n}\beta_iB^n_i(t)\] możemy podstawić równanie 
+(\ref{to_poly}) w miejsce $t^i$:
+\begin{equation}
+  \pi_n(t) = 
+  {\sum_{i=0}^n}a_i{n \choose i}^{-1}{\sum_{j=i}^n}{j \choose i}B^n_j(t)
+\end{equation}
+\newpage
+Korzystając z równości powyżej można skonstruować algorytm na wyznaczanie 
+$\beta_0, \beta_1, \beta_2, \ldots, \beta_n$
+dla wielomianu $\pi_n$ w następujący sposób:
+\begin{algorithmic}
+  \For {$i = 0 \to n$}
+    \For {$j = i \to n$}
+      \State $\beta_j \gets a_i{n \choose i}^{-1}{j \choose i}$
+    \EndFor  
+  \EndFor
+\end{algorithmic}
+Co ciekawe, iloczyn \[{n \choose i}^{-1}{j \choose i}\] możemy zapisać jako:
+\[{\prod^n_{k=n-i+1}}\frac{k-n+j}{k}\]
+Co zostało użyte w implementacji.
+
+\subsection{Przekształcanie wielomianu z postaci Béziera do postaci potęgowej}
+Przekształcenie z postaci potęgowej do postaci Béziera realizujemy korzystając
+z następującego wzoru:
+\begin{equation}
+  \label{to_bez}
+  B^n_i(t) = {\sum_{k=i}^n}(-1)^{i+k}{k \choose i}{n \choose k}t^k
+\end{equation}
+
+Podstawiając równość (\ref{to_bez}) do naszej postaci Béziera wielomianu 
+$\pi_n$ otrzymujemy następujący wzór:
+\begin{equation}
+  \pi_n(t) = {\sum_{i=0}^n}\beta_i{\sum_{k=i}^n}(-1)^{i+k}
+  {k \choose i}{n \choose k}t^k
+\end{equation}
+
+Co pozwala nam na konstrukcję następującego algorytmu:
+\begin{algorithmic}
+  \For {$i = 0 \to n$}
+    \For {$k = i \to n$}
+      \State $a_i \gets (-1)^{i+k}{n \choose i}{k \choose i}\beta_i$
+    \EndFor
+  \EndFor
+\end{algorithmic}
+
+Niestety, nie znaleziono żadnych możliwości uproszczenia iloczynu 
+${n \choose i}{k \choose i}$. Musimy go liczyć wprost. W implementacji tego rozwiązania wykorzystano trójkąt Pascala.
+
+\section{Testy}
+\subsection{Wielokrotnie przekształcanie z jednej bazy do drugiej}
+Zaprezentowane wcześniej metody zostały przetestowane na czterech zaprezentowanych poniżej wielomianach. Wielomiany te zostały otrzymane z wielomianów o stopniach mniejszych o 1 przez pomnożenie ich razy $(x-x_0)$. Zatem $x_0$ jest jednym z pierwiastków. W przypadku pierwszego równania jest to $1, 4, -3, 2$. Podane poniżej wielomiany są $4, 10, 12, 20$ stopnia. Nawet przy tak niskich stopniach konwersja między postaciami jest stratna. 
+\begin{equation}
+  \begin{align}
+    p1(x) = x^{4} - 6x^{3} + 11x^{2} - 6x\\
+    p2(x) = 2x^{10}-31x^{9}+44x^{8}+204x^{7}+13x^{6}-287x^{5}+159x^{4}+60x^{3}-29x^{2}-48x+144\\
+    p3(x) = -3x^{12}-8x^{11}+7x^{10}+4x^{9}-40x^{8}-60x^{7}-54x^{6}-18x^{5}+109x^{4}-2x^{2}+29x+24\\
+    p4(x) = -7x^{20}+62x^{19}-79x^{18}+16x^{17}-97x^{16}-4x^{15}-11x^{14}+28x^{13}+25x^{12}-193x^{11}\\
+    +285x^{10}-226x^{9}+13x^{8}-6x^{7}-7x^{6}-15x^{5}-51x^{4}+168x^{3}-26x^{2}+4x-16
+  \end{align}
+\end{equation}
+Przeprowadzono test, przekształcając w postać Béziera wielomiany $p1,p2,p3,p4$ kolejno $1,10,100,1000,10000,100000,1000000$ razy. Ewaluacja algorytmami de Casteljau i Hornera wykazała te same wyniki i była przeprowadzana w punkcie zerowym wielomianu. Program wykonujący ten test został uwzględniony w plikach pracowni.
+Poprzez obliczenie wartości w pierwiastkach wielomianów zostały uzyskane błędy bezwzględne. Wykresy to ilustrujące są widoczne poniżej.
+
+\includegraphics*[width=\linewidth]{hornerplot}
+\includegraphics*[width=\linewidth]{decasteljauplot}
+
+\section{Ocena wyników i wnioski}
+Z wykresów można wywnioskować, że błąd rośnie wykładniczo. Już nawet przy wielomianie 20-ego stopnia po milionie przekształceń otrzymany błąd jest rzędu $17\%$. Jest to dość duże odchylenie od poprawnej wartości. Stąd ta metoda nie nadaje się do zastosowań, gdzie potrzebna jest duża dokładność obliczeń. Często w praktycznych zastosowaniach w obliczeniach potrzebne są wielomiany stopni znacznie większych niż 20, a będą one jeszcze mniej dokładnie reprezentowane przez błędy arytmetyki komputera. Złożone obrazy wykorzystujące krzywe Beziera korzystają często z wielomianów stopnia około $400$, a nawet większych. W tym wypadku próba przekształcenia postaci Beziera wielomianu do postaci potęgowej skazuje nas na ogromne błędy numeryczne.
+\end{document}
